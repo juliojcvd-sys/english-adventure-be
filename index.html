@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#176e7a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<title>English Adventure do Bê | Aventura Completa</title>
+<style>
+:root{
+  --navy:#12325f; --blue:#1f6fff; --sky:#dff3ff; --gold:#ffca3a; --ink:#183047; --muted:#5f7487;
+  --paper:#ffffff; --green:#1fa866; --red:#d53b3b; --bg1:#eaf7ff; --bg2:#f8fbff; --purple:#6a5cff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:
+ radial-gradient(circle at 10% 10%, #fff9d7 0, transparent 24%),
+ radial-gradient(circle at 92% 8%, #d5e9ff 0, transparent 23%),
+ linear-gradient(180deg,#e8f5ff 0,#f5fbff 32%,#f7f9fd 100%);} 
+img{max-width:100%;display:block}
+.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}
+header{padding:26px 0 10px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;background:linear-gradient(135deg,#12325f 0%,#1b4f94 55%,#3476ff 100%);color:white;border-radius:30px;padding:28px;box-shadow:0 24px 50px rgba(18,50,95,.20);position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:999px;opacity:.25}
+.hero:before{width:220px;height:220px;background:#7dd3fc;right:-50px;top:-60px}
+.hero:after{width:180px;height:180px;background:#fde68a;left:-30px;bottom:-60px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:.95;margin:14px 0 10px;letter-spacing:-.04em}
+.hero p{max-width:620px;margin:0;color:#e7f1ff;font-size:16px;line-height:1.6}
+.hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+.badge{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);font-size:13px;font-weight:800}
+.hero-right{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1}
+.photo-card{background:rgba(255,255,255,.1);backdrop-filter:blur(4px);padding:10px;border-radius:24px;border:1px solid rgba(255,255,255,.25);box-shadow:0 14px 22px rgba(0,0,0,.12)}
+.photo-card img{height:240px;width:100%;object-fit:cover;border-radius:18px}
+.photo-caption{font-size:12px;font-weight:800;letter-spacing:.03em;color:#fef3c7;padding:8px 4px 2px}
+.sparkle{position:absolute;right:14px;top:12px;font-size:18px}
+.dashboard{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin:20px 0}
+.panel,.stat-card,.profile-card,.mission-card,.journey-card,.tip-card{background:var(--paper);border:1px solid #dfebf4;border-radius:24px;box-shadow:0 12px 30px rgba(18,50,95,.07)}
+.panel{padding:18px}
+.top-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat-card{padding:16px}
+.stat-label{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.stat-value{font-size:30px;font-weight:900;color:var(--navy);margin-top:4px}
+.progress-wrap{margin-top:14px;padding:14px;border-radius:18px;background:#f8fbff;border:1px solid #e7eef6}
+.progress-head{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:900;color:var(--navy);margin-bottom:9px}
+.bar{height:12px;background:#e5edf7;border-radius:999px;overflow:hidden}.bar>div{height:100%;width:0;background:linear-gradient(90deg,#22c55e,#38bdf8,#2563eb);transition:width .25s}
+.progress-note{display:block;margin-top:8px;color:var(--muted);font-size:12px;line-height:1.5}
+.profile-card{padding:18px;display:flex;flex-direction:column;gap:14px}
+.profile-head{display:flex;align-items:center;gap:12px}
+.avatar-ring{width:58px;height:58px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#facc15,#38bdf8,#2563eb)}
+.avatar-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid white}
+.profile-card h3{margin:0;font-size:20px;color:var(--navy)}
+.profile-card p{margin:0;color:var(--muted);line-height:1.55}
+.name-box{display:flex;gap:10px;flex-wrap:wrap}
+.name-box input{flex:1;min-width:160px;padding:12px 14px;border:1px solid #cfdbe8;border-radius:14px;font:inherit}
+.action-btn,.btn,.close,.save-name{border:0;background:var(--blue);color:#fff;font-weight:900;padding:12px 16px;border-radius:14px;cursor:pointer;font-size:14px;box-shadow:0 10px 20px rgba(37,99,235,.16)}
+.save-name{padding:12px 14px;white-space:nowrap}
+.save-name.alt,.btn.secondary{background:#eef5ff;color:#1843a3;box-shadow:none}
+.mini-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini-gallery img{height:140px;object-fit:cover;border-radius:18px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:26px 0 10px}
+.section-head h2{margin:0;font-size:28px;color:var(--navy)}
+.section-head p{margin:0;color:var(--muted)}
+.missions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.mission-card{padding:16px;cursor:pointer;text-align:left;color:inherit;transition:transform .18s,border-color .18s, box-shadow .18s;border:1px solid #dfeaf6;position:relative;overflow:hidden}
+.mission-card:hover{transform:translateY(-3px);box-shadow:0 18px 28px rgba(18,50,95,.11);border-color:#9ac7ff}
+.mission-card:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:0 12px 30px rgba(18,50,95,.07)}
+.mission-card .m-top{display:flex;gap:14px;align-items:flex-start;position:relative;z-index:1}
+.mission-card:before{content:"";position:absolute;right:-20px;top:-26px;width:110px;height:110px;background:linear-gradient(135deg,#dbeafe,#fef3c7);border-radius:50%;opacity:.8}
+.emoji{width:52px;height:52px;border-radius:16px;background:#eef6ff;display:grid;place-items:center;font-size:27px;flex-shrink:0;box-shadow:inset 0 0 0 1px #d7e7fa}
+.mission-card h3{margin:0 0 5px;font-size:18px;color:var(--navy)}
+.mission-card p{margin:0;color:var(--muted);line-height:1.45;font-size:13px}
+.tag{display:inline-block;margin-top:10px;border-radius:999px;padding:5px 10px;background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:900}.tag.done{background:#dcfce7;color:#166534}.tag.lock{background:#f1f5f9;color:#64748b}
+.reward{margin-top:10px;font-size:12px;font-weight:900;color:#805b00}
+.journey-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:18px}
+.journey-card,.tip-card{padding:16px}
+.journey-card h4,.tip-card h4{margin:0 0 8px;color:var(--navy)}
+.journey-card p,.tip-card p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+.journey-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#edf5ff;font-size:24px;margin-bottom:8px}
+.panel.active{display:block}
+.exercise-panel{display:none;padding:22px;margin-top:20px}
+.panel-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.close{background:#eef5ff;color:#17409d;box-shadow:none}
+.panel-top h2{margin:4px 0 8px;color:var(--navy);font-size:clamp(24px,4vw,34px)}
+.sub{color:var(--muted);line-height:1.6;margin-top:0}
+.mission-banner{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;margin:14px 0 18px;padding:14px;border-radius:20px;background:linear-gradient(135deg,#f8fbff 0,#eef6ff 100%);border:1px solid #dfebf7}
+.mission-banner img{width:100%;height:220px;object-fit:cover;border-radius:18px}
+.banner-copy{display:flex;flex-direction:column;justify-content:center}
+.banner-copy .line{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#2563eb}
+.banner-copy h3{margin:6px 0 10px;font-size:23px;color:var(--navy)}
+.banner-copy p{margin:0;color:var(--muted);line-height:1.6}
+.word-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 16px}
+.word{border:1px solid #e3ebf5;background:#fbfdff;border-radius:16px;padding:13px}.word b{display:block;font-size:18px;color:#1d4ed8}.word span{font-size:13px;color:var(--muted)}
+.task{padding:15px;border-radius:16px;background:#f8fbff;border:1px solid #e4edf7;margin:11px 0}.task h3{font-size:16px;margin:0 0 8px;color:var(--navy)}.task p{margin:6px 0;line-height:1.6}.example{color:#1d4ed8;font-weight:800}
+.question{font-weight:850;margin-bottom:10px;color:var(--navy)}
+.options{display:grid;gap:8px}.option{padding:11px 12px;border:1px solid #cbd7e5;border-radius:12px;background:white;text-align:left;cursor:pointer;font:inherit}.option:hover{border-color:#60a5fa;background:#f8fbff}.option.selected{border-color:#2563eb;background:#eff6ff}.option.correct{border-color:#16a34a;background:#f0fdf4}.option.wrong{border-color:#dc2626;background:#fef2f2}.feedback{font-weight:800;font-size:13px;margin-top:8px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{padding:12px 16px}.btn.secondary{box-shadow:none}.btn:disabled{opacity:.45;cursor:not-allowed}
+.notice{padding:14px 16px;border-radius:16px;background:#fffbeb;color:#854d0e;font-size:13px;line-height:1.55;margin:16px 0 0;border:1px solid #fde68a}
+.footer{text-align:center;color:#708195;font-size:12px;padding:24px 0 34px;line-height:1.7}.reset{border:0;background:none;color:#61748a;text-decoration:underline;cursor:pointer;font:inherit;font-size:12px;margin-top:8px}
+
+.speech-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid #e5edf7}
+.speech-row:last-child{border-bottom:0}
+.speech-copy{flex:1;min-width:190px}.speech-copy .english-line{display:block;color:#1d4ed8;font-weight:850}.speech-copy .translation-line{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+.speech-actions{display:flex;gap:7px;flex-wrap:wrap}.speech-btn{border:1px solid #bfd7f4;background:#fff;color:#17409d;border-radius:11px;padding:8px 10px;font:inherit;font-size:12px;font-weight:850;cursor:pointer}.speech-btn:hover{background:#eff6ff}.speech-feedback{width:100%;margin:2px 0 0;font-size:12px;line-height:1.45;color:#53677b}.speech-feedback.good{color:#15803d}.speech-feedback.try{color:#a16207}
+.word{display:flex;align-items:center;justify-content:space-between;gap:8px}.word .word-copy{min-width:0}.word .word-copy b{display:block;font-size:18px;color:#1d4ed8}.word .word-copy span{font-size:13px;color:var(--muted)}.word .speech-btn{flex-shrink:0;padding:7px 8px}
+
+.small-sticker{display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #c7f3d7;color:#166534;padding:6px 9px;border-radius:999px;font-size:12px;font-weight:800}
+@media (max-width:980px){.hero,.dashboard,.mission-banner{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr 1fr}.hero-right .photo-card img{height:220px}}
+@media (max-width:720px){.wrap{width:min(100% - 22px,1120px)}.top-stats,.missions,.journey-grid,.word-grid,.hero-right,.mini-gallery{grid-template-columns:1fr}.hero{padding:22px}.photo-card img,.mission-banner img{height:210px}.stat-value{font-size:25px}.panel,.profile-card,.mission-card,.journey-card,.tip-card{border-radius:20px}.section-head{display:block}.section-head p{margin-top:6px}}
+
+/* O personagem oficial acompanha a aventura sem alterar o mapa ou o progresso. */
+.hero > div:first-child{position:relative;z-index:1;min-width:0}
+.hero-right{align-items:center;gap:12px}
+.photo-card{position:relative;min-width:0;transform:rotate(-2deg);background:#fff5d8;border:2px solid #f6d786;padding:8px;box-shadow:0 12px 24px #081e3d33}
+.photo-card:nth-child(2){transform:rotate(3deg);margin-top:42px}
+.hero-right .photo-card img{height:auto;width:100%;aspect-ratio:1;object-fit:contain;border-radius:16px}
+.photo-caption{color:#684914;line-height:1.5;font-size:11px;padding:8px 4px 3px}
+.sparkle{z-index:1;background:#fff5d8;border:1px solid #f6d786;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;right:-7px;top:-12px}
+.avatar-ring{flex-shrink:0;width:68px;height:68px}
+.mini-gallery{padding:9px;border:1px dashed #d7b86d;border-radius:22px;background:#fff8e7}
+.mini-gallery img{width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:14px}
+.mini-gallery img:nth-child(2){transform:rotate(2deg)}
+.mission-banner{background:linear-gradient(135deg,#fff6db,#eef8ff);border-color:#eddaac}
+.mission-banner img{height:auto;max-height:340px;aspect-ratio:1;object-fit:contain;background:#fff5d8}
+.emoji img,.journey-icon img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+button:focus-visible,input:focus-visible{outline:3px solid #ce8509;outline-offset:4px}
+@media(max-width:720px){
+ .hero-right{grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 4px}
+ .photo-card:nth-child(2){margin-top:24px}
+ .photo-caption{font-size:10px}
+ .mini-gallery{grid-template-columns:1fr 1fr}
+ .name-box input{min-width:0;width:100%}
+ .profile-head>div:last-child{min-width:0}
+ .small-sticker{flex-wrap:wrap}
+ .mission-banner img{max-height:300px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+<link rel="stylesheet" href="adventure.css">
+</head>
+<body>
+<header class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">✦ aventura personalizada do Bê</div>
+      <h1>English<br>Adventure</h1>
+      <div style="font-size:clamp(18px,2.5vw,25px);font-weight:900;color:#ffdf70;margin:0 0 10px">✦ Bem-vindo, Bê!</div>
+      <p id="heroGreeting">Bê, prepare a mochila! São vários mundos para explorar, palavras para descobrir e missões para conquistar — um pouquinho de inglês todos os dias!</p>
+      <div class="hero-badges">
+        <span class="badge">✦ 1 missão por dia</span>
+        <span class="badge">✦ 7 mundos para explorar</span>
+        <span class="badge">⭐ 100 XP por missão</span>
+        <span class="badge">✦ clima de aventura</span>
+        <span class="badge">✦ falar em inglês</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="explorer-portrait"><span class="portrait-label">DIÁRIO DE BORDO · EXPLORADOR 01</span><img src="assets/be-explorador.webp" alt="Bê, o explorador oficial, com seu mapa e sua bússola" width="1000" height="1000" fetchpriority="high"><span class="portrait-stamp">PRONTO PARA EXPLORAR!</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="dashboard">
+    <div class="panel">
+      <div class="top-stats">
+        <div class="stat-card"><svg class="stat-emblem" viewBox="0 0 60 62" aria-hidden="true"><path d="m30 6 7 15 17 2-13 12 4 18-15-9-15 9 4-18L6 23l17-2z" fill="#edb844" stroke="#b28b37" stroke-width="2"/></svg><div class="stat-label">XP conquistados</div><div class="stat-value" id="xp">0</div></div>
+        <div class="stat-card"><svg class="stat-emblem" viewBox="0 0 60 62" aria-hidden="true"><path d="m15 7 8 25h15L46 7H34l-4 16-4-16z" fill="#4b9993"/><circle cx="30" cy="39" r="17" fill="#edc564" stroke="#b99a45" stroke-width="2"/><path d="m23 39 5 5 10-12" fill="none" stroke="#806a28" stroke-width="4"/></svg><div class="stat-label">Missões concluídas</div><div class="stat-value" id="completed">0</div></div>
+        <div class="stat-card"><svg class="stat-emblem" viewBox="0 0 60 62" aria-hidden="true"><path d="M32 4q4 16 13 24 14 25-13 29Q6 57 14 33q1-10 9-15l-1 17Q33 24 32 4z" fill="#d88e56"/><path d="M30 31q-14 22 3 22 13-3-3-22" fill="#ffdf89"/></svg><div class="stat-label">Sequência de dias</div><div class="stat-value" id="streak">0</div></div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-head"><span>Mapa da aventura</span><span id="progressLabel">0%</span></div>
+        <div class="bar"><div id="progressBar"></div></div>
+        <small class="progress-note">Complete as missões em ordem para abrir os próximos caminhos. O progresso fica salvo neste dispositivo e neste navegador.</small>
+      </div>
+    </div>
+
+    <aside class="profile-card">
+      <div class="profile-head">
+        <div class="avatar-ring"><img src="assets/be-avatar.webp" alt="Avatar ilustrado do Bê" width="240" height="240"></div>
+        <div>
+          <h3 id="profileName">Bê</h3>
+          <div class="small-sticker">✦ aventureiro oficial do inglês</div>
+        </div>
+      </div>
+      <p>Este é o seu mapa, Bê! Explore cada mundo, pratique falando em voz alta e comemore cada conquista.</p>
+      <div class="name-box">
+        <input type="text" id="childName" value="Bê" aria-label="Nome do explorador">
+        <button class="save-name" id="saveName">Salvar nome</button>
+      </div>
+      <a class="map-link" href="#adventureMap">Abrir meu mapa <span aria-hidden="true">↗</span></a>
+    </aside>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <span class="section-kicker">SEU PRÓXIMO DESTINO ESTÁ AQUI</span><h2>Mapa da Grande Aventura</h2>
+      <p>São 37 missões em 7 mundos. Faça uma por dia, no seu ritmo, Bê!</p>
+    </div>
+  </div>
+  <section class="adventure-map" id="adventureMap" aria-label="Mapa dos sete mundos"><div class="map-toolbar"><span>O ARQUIPÉLAGO DO INGLÊS</span><span class="map-compass" aria-hidden="true">✦ N</span></div><div class="cinematic-map"><img class="archipelago-art" src="assets/scenes/adventure-archipelago.webp" alt="Arquipélago mágico com ilhas, floresta tropical, montanhas, cachoeiras, pontes, cavernas e tesouros" width="1376" height="768"><svg class="island-route" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true"><path d="M490 250Q650 280 680 420T350 420Q140 300 830 240Q420 150 180 270Q180 40 310 100"/></svg><div id="islandDestinations" class="island-destinations"></div><div class="map-invitation"><span class="section-kicker">SEU DIÁRIO DE EXPLORAÇÃO</span><h3>Um mundo inteiro<br>de descobertas.</h3><p>Escolha uma ilha para conhecer suas missões.</p></div></div><nav class="world-nav" id="worldNav" aria-label="Ir para um mundo"></nav><div class="map-legend"><span>● Sua próxima missão</span><span>✦ Concluída</span><span>◇ Caminho a desbloquear</span></div><div class="missions" id="missionList"></div><div class="map-finish">✦ FIM DO MAPA. COMEÇO DE MUITAS HISTÓRIAS. ✦</div></section>
+
+  <div class="journey-grid">
+    <div class="journey-card"><div class="journey-icon">✦</div><h4>Aprender brincando</h4><p>Cada missão mistura vocabulário, fala e quiz para manter o estudo leve e divertido.</p></div>
+    <div class="journey-card"><div class="journey-icon">✦</div><h4>Clima de aventura</h4><p>O visual lembra uma jornada de exploração, com fases, recompensas e sensação de conquista.</p></div>
+    <div class="journey-card"><div class="journey-icon"><img src="assets/be-avatar.webp" alt="" width="44" height="44" loading="lazy"></div><h4>O Bê é o protagonista</h4><p>Com mapa e bússola na mão, o Bê explorador acompanha cada descoberta nesta aventura feita para ele.</p></div>
+  </div>
+
+  <section class="panel exercise-panel" id="missionPanel" aria-live="polite">
+    <div class="panel-top">
+      <div>
+        <div class="eyebrow" id="missionEyebrow" style="color:#2563eb;background:#eef6ff;border-color:#d5e8ff">MISSÃO 001</div>
+        <h2 id="missionTitle"></h2>
+        <p class="sub" id="missionIntro"></p>
+      </div>
+      <button class="close" id="closePanel" aria-label="Fechar missão">✦</button>
+    </div>
+    <div class="mission-banner">
+      <img id="missionImage" src="assets/be-explorador.webp" alt="Bê, o menino explorador ilustrado, pronto para a missão" width="1000" height="1000">
+      <div class="banner-copy">
+        <div class="line">modo aventura ativado</div>
+        <h3 id="bannerTitle">Explorer Challenge</h3>
+        <p id="bannerText">Prepare-se para aprender brincando e completar o desafio do dia.</p>
+      </div>
+    </div>
+    <div id="missionContent"></div>
+  </section>
+
+  <div class="notice">✦ Dica para a família: incentive a criança a falar em voz alta. Errar faz parte da aventura. O mais importante é praticar todos os dias.</div>
+  <div class="footer">English Adventure do Bê · Aventura Completa<br><button class="reset" id="resetBtn">Reiniciar progresso neste dispositivo</button></div>
+</main>
+
+<script>
+const explorerIllustration = 'assets/be-explorador.webp';
+const missions = [
+{title:"The Clothes Shop",emoji:"👕",theme:"Clothes & shoes",intro:"Entre na loja e aprenda a falar sobre roupas.",reward:"+100 XP · Badge: Fashion Explorer",banner:"Hoje o explorador vai entrar na loja de roupas e sair falando novas palavras em inglês!",words:[["T-shirt","camiseta"],["jeans","calça jeans"],["sneakers","tênis"],["dress","vestido"]],phrases:["I wear a T-shirt. — Eu uso uma camiseta.","I wear jeans. — Eu uso calça jeans.","I wear sneakers. — Eu uso tênis."],speak:"Olhe para sua roupa e diga: “I wear a…” Complete com uma peça de roupa que você está usando.",quiz:[{q:"Como se diz “camiseta” em inglês?",opts:["Dress","T-shirt","Sneakers"],a:1},{q:"O que significa “jeans”?",opts:["Calça jeans","Vestido","Tênis"],a:0},{q:"Complete: I wear ____.",opts:["eyes","birthday","sneakers"],a:2}]},
+{title:"The Face Detective",emoji:"🕵️",theme:"Hair, eyes & appearance",intro:"Vire um detetive e descubra como descrever a aparência das pessoas.",reward:"+100 XP · Badge: Face Detective",banner:"Use suas habilidades de observação para falar sobre cabelo, olhos e aparência.",words:[["hair","cabelo"],["eyes","olhos"],["curly","cacheado"],["straight","liso"]],phrases:["My hair is curly. — Meu cabelo é cacheado.","My hair is straight. — Meu cabelo é liso.","I have brown eyes. — Eu tenho olhos castanhos."],speak:"Escolha alguém de uma foto (sem precisar dizer o nome) e fale uma frase simples sobre cabelo ou olhos.",quiz:[{q:"O que significa “hair”?",opts:["Olhos","Cabelo","Roupas"],a:1},{q:"“Curly hair” é cabelo…",opts:["cacheado","liso","curto"],a:0},{q:"Complete: I have two ____.",opts:["jeans","hair","eyes"],a:2}]},
+{title:"Dress the Character",emoji:"🎨",theme:"Describe what people wear",intro:"Vista um personagem imaginário e conte o que ele está usando.",reward:"+100 XP · Badge: Character Stylist",banner:"Hora de usar a imaginação e montar o look perfeito do personagem aventureiro.",words:[["shirt","camisa"],["shorts","bermuda/shorts"],["glasses","óculos"],["shoes","sapatos"]],phrases:["I wear a shirt. — Eu uso uma camisa.","I wear shorts. — Eu uso shorts.","I wear glasses. — Eu uso óculos."],speak:"Imagine um personagem. Diga duas frases começando com “I wear…”",quiz:[{q:"Como se diz “óculos”?",opts:["Glasses","Shoes","Shorts"],a:0},{q:"O que significa “shoes”?",opts:["Camisa","Sapatos","Cabelo"],a:1},{q:"Complete: I wear ____.",opts:["eyes","glasses","curly"],a:1}]},
+{title:"Secret Listening",emoji:"🎧",theme:"Listen & understand",intro:"Leia as frases em voz alta (ou peça a alguém para lê-las) e descubra o significado.",reward:"+100 XP · Badge: Listening Agent",banner:"Missão secreta! Agora é hora de ouvir com atenção e entender o inglês falado.",words:[["I have…","Eu tenho…"],["I wear…","Eu uso…"],["What…?","O quê…?"],["My…","Meu/minha…"]],phrases:["I have brown eyes. — Eu tenho olhos castanhos.","I wear sneakers. — Eu uso tênis.","My hair is curly. — Meu cabelo é cacheado."],speak:"Peça a alguém para ler uma das frases sem mostrar a tradução. Tente dizer em português o que entendeu.",quiz:[{q:"“I have brown eyes” significa…",opts:["Eu uso tênis","Eu tenho olhos castanhos","Meu cabelo é liso"],a:1},{q:"“I wear sneakers” significa…",opts:["Eu uso tênis","Eu tenho cabelo","Eu gosto de bolo"],a:0},{q:"Qual frase fala sobre cabelo?",opts:["I wear jeans.","My hair is curly.","I have sneakers."],a:1}]},
+{title:"Meet a New Friend",emoji:"🤝",theme:"Questions & answers",intro:"Conheça um novo amigo usando perguntas e respostas simples.",reward:"+100 XP · Badge: Friendly Explorer",banner:"Toda aventura fica melhor com novos amigos. Treine perguntas e respostas básicas.",words:[["What is…?","O que é…?/Qual é…?"],["My name is…","Meu nome é…"],["I am…","Eu sou/estou…"],["And you?","E você?"]],phrases:["What is your name? — Qual é o seu nome?","My name is Alex. — Meu nome é Alex.","And you? — E você?"],speak:"Faça o diálogo com alguém ou pratique os dois lados: “What is your name?” / “My name is…”.",quiz:[{q:"Como responder “What is your name?”",opts:["My name is…","I wear jeans.","It is a tent."],a:0},{q:"O que significa “And you?”",opts:["Até amanhã","E você?","Muito obrigado"],a:1},{q:"Escolha a frase em inglês para “Meu nome é Ana”.",opts:["I name Ana.","My name is Ana.","Name my Ana."],a:1}]},
+{title:"Treasure Hunt",emoji:"🗺️",theme:"Review & word hunt",intro:"Encontre palavras conhecidas pela casa e use-as em inglês.",reward:"+100 XP · Badge: Treasure Hunter",banner:"Caça ao tesouro! Procure objetos e palavras do inglês no seu dia a dia.",words:[["T-shirt","camiseta"],["shoes","sapatos"],["glasses","óculos"],["jeans","calça jeans"]],phrases:["I can see a T-shirt. — Eu consigo ver uma camiseta.","I can see shoes. — Eu consigo ver sapatos.","I wear jeans. — Eu uso calça jeans."],speak:"Encontre três objetos ou peças de roupa e fale seus nomes em inglês. Se conseguir, forme uma frase com um deles.",quiz:[{q:"Qual palavra significa “sapatos”?",opts:["Hair","Shoes","Eyes"],a:1},{q:"“I can see a T-shirt” significa…",opts:["Eu vejo uma camiseta","Eu tenho olhos","Eu gosto de viajar"],a:0},{q:"Qual palavra significa “óculos”?",opts:["Glasses","Dress","Shorts"],a:0}]},
+{title:"Boss Challenge",emoji:"🏆",theme:"Final review",intro:"Chegou a hora de mostrar o que você aprendeu no primeiro mundo!",reward:"+100 XP · Badge: Adventure Champion",banner:"Desafio final! Junte tudo o que aprendeu e prove que você é o campeão desta aventura.",words:[["clothes","roupas"],["hair","cabelo"],["eyes","olhos"],["speak","falar"]],phrases:["I wear a T-shirt. — Eu uso uma camiseta.","My hair is curly. — Meu cabelo é cacheado.","I have brown eyes. — Eu tenho olhos castanhos."],speak:"Sem olhar as respostas, fale três frases em inglês: uma sobre roupa, uma sobre cabelo e uma sobre olhos.",quiz:[{q:"O que significa “dress”?",opts:["Vestido","Tênis","Olhos"],a:0},{q:"Complete: My hair is ____.",opts:["eyes","curly","jeans"],a:1},{q:"Como se diz “Eu uso tênis”?",opts:["I have eyes.","I wear sneakers.","My name is sneakers."],a:1},{q:"“Eyes” significa…",opts:["Olhos","Cabelo","Camisa"],a:0},{q:"Escolha uma frase correta.",opts:["I wear a T-shirt.","I am eyes brown.","I curly hair is."],a:0}]}
+];
+
+
+// Novos mundos: família, aniversários, viagens, brincadeiras, horários e rotina.
+function makeMission(world,title,emoji,theme,intro,words,phrases,speak){
+  const phraseParts=phrases.map(p=>p.split(' — '));
+  return {world,title,emoji,theme,intro,reward:'+100 XP · Badge: '+title, banner:'Bê, prepare-se para esta etapa: aprenda, fale em voz alta e complete o desafio!',words,phrases,speak,quiz:[
+    {q:'Como se diz “'+words[0][1]+'” em inglês?',opts:[words[0][0],words[1][0],words[2][0]],a:0},
+    {q:'O que significa “'+words[1][0]+'”?',opts:[words[2][1],words[1][1],words[3][1]],a:1},
+    {q:'Qual frase significa “'+(phraseParts[0][1]||'')+'”?',opts:[phraseParts[1][0],phraseParts[0][0],phraseParts[2][0]],a:1}
+  ]};
+}
+const extraMissions = [
+// WORLD 2 — FAMILY
+makeMission('Mundo 2 · Family Island','My Family','👨‍👩‍👦','Family members','Conheça as palavras para falar das pessoas da família.',[['mother','mãe'],['father','pai'],['sister','irmã'],['brother','irmão']],['This is my family. — Esta é minha família.','I love my mother. — Eu amo minha mãe.','My brother is funny. — Meu irmão é engraçado.'],'Fale “This is my family” e diga em inglês quem faz parte da sua família.'),
+makeMission('Mundo 2 · Family Island','Baby and Family','🍼','Family members','Aprenda palavras para falar de bebês e parentes.',[['baby','bebê'],['grandma','vovó'],['grandpa','vovô'],['cousin','primo/prima']],['The baby is cute. — O bebê é fofo.','My grandma is kind. — Minha vovó é gentil.','I visit my grandpa. — Eu visito meu vovô.'],'Escolha uma foto da família e tente falar: “This is my…” usando uma palavra nova.'),
+makeMission('Mundo 2 · Family Island','Family Feelings','💛','Feelings','Conte como você e sua família se sentem.',[['happy','feliz'],['kind','gentil'],['funny','engraçado'],['tired','cansado']],['I am happy. — Eu estou feliz.','My family is kind. — Minha família é gentil.','We are happy together. — Estamos felizes juntos.'],'Faça uma expressão de felicidade e diga “I am happy!”.'),
+makeMission('Mundo 2 · Family Island','At Home Together','🏡','Home and family','Explore palavras de casa e momentos em família.',[['home','casa/lar'],['house','casa'],['together','juntos'],['love','amor/amar']],['I am at home. — Eu estou em casa.','We play together. — Nós brincamos juntos.','I love my family. — Eu amo minha família.'],'Complete em voz alta: “I love my…”'),
+makeMission('Mundo 2 · Family Island','Family Photo Mission','📸','Introduce your family','Pratique apresentar pessoas usando frases simples.',[['this','este/esta'],['he','ele'],['she','ela'],['they','eles/elas']],['This is my dad. — Este é meu pai.','She is my sister. — Ela é minha irmã.','They are my family. — Eles são minha família.'],'Imagine que está mostrando uma foto e apresente duas pessoas em inglês.'),
+// WORLD 3 — BIRTHDAYS
+makeMission('Mundo 3 · Birthday Kingdom','Happy Birthday!','🎂','Birthday words','Entre na festa e aprenda palavras de aniversário.',[['birthday','aniversário'],['cake','bolo'],['candles','velas'],['gift','presente']],['Today is my birthday. — Hoje é meu aniversário.','I see a cake. — Eu vejo um bolo.','Thank you for the gift. — Obrigado pelo presente.'],'Finja que é seu aniversário e diga “Today is my birthday!”.'),
+makeMission('Mundo 3 · Birthday Kingdom','Party Time','🎉','Party objects','Descubra objetos que aparecem em uma festa.',[['balloon','balão'],['party','festa'],['music','música'],['friends','amigos']],['I see a balloon. — Eu vejo um balão.','The music is fun. — A música é divertida.','I play with my friends. — Eu brinco com meus amigos.'],'Escolha três coisas de uma festa e fale os nomes em inglês.'),
+makeMission('Mundo 3 · Birthday Kingdom','Make a Wish','🌟','Birthday wishes','Aprenda a desejar coisas boas em uma comemoração.',[['wish','desejo'],['joy','alegria'],['great','ótimo'],['today','hoje']],['Make a wish! — Faça um pedido!','Have a great day! — Tenha um ótimo dia!','Today is special. — Hoje é especial.'],'Faça um pedido imaginário e diga “Make a wish!”'),
+makeMission('Mundo 3 · Birthday Kingdom','Birthday Numbers','🔢','Numbers and age','Pratique números e como dizer sua idade.',[['one','um'],['five','cinco'],['ten','dez'],['years old','anos de idade']],['I am ten years old. — Eu tenho dez anos.','Five candles on the cake. — Cinco velas no bolo.','I count to ten. — Eu conto até dez.'],'Conte de um a dez em inglês. Se precisar, use os dedos para ajudar.'),
+makeMission('Mundo 3 · Birthday Kingdom','Party Invitation','✉️','Invitations','Aprenda frases simples para convidar alguém.',[['come','venha'],['please','por favor'],['party','festa'],['welcome','bem-vindo']],['Come to my party! — Venha à minha festa!','Please come! — Por favor, venha!','Welcome, my friend! — Bem-vindo, meu amigo!'],'Convide alguém para uma festa imaginária dizendo “Come to my party!”.'),
+// WORLD 4 — TRAVEL
+makeMission('Mundo 4 · Travel Planet','Pack Your Bag','🎒','Travel essentials','Arrume a mochila para uma aventura e aprenda itens úteis.',[['bag','bolsa/mochila'],['water','água'],['snack','lanche'],['map','mapa']],['I have a bag. — Eu tenho uma mochila.','I need water. — Eu preciso de água.','Look at the map. — Olhe para o mapa.'],'Finja que vai viajar e diga três coisas que levaria na mochila.'),
+makeMission('Mundo 4 · Travel Planet','At the Beach','🏖️','Beach vocabulary','Explore palavras para um dia de praia.',[['beach','praia'],['sea','mar'],['sand','areia'],['sun','sol']],['I love the beach. — Eu amo a praia.','The sea is blue. — O mar é azul.','The sun is hot. — O sol está quente.'],'Imagine que chegou à praia e fale “I love the beach!”.'),
+makeMission('Mundo 4 · Travel Planet','On the Road','🚗','Transport','Descubra meios de transporte para viajar.',[['car','carro'],['bus','ônibus'],['plane','avião'],['boat','barco']],['I travel by car. — Eu viajo de carro.','The bus is big. — O ônibus é grande.','The plane is fast. — O avião é rápido.'],'Escolha seu transporte favorito e diga “I travel by…”.'),
+makeMission('Mundo 4 · Travel Planet','Find the Place','🧭','Places','Aprenda a falar de lugares que pode visitar.',[['park','parque'],['hotel','hotel'],['school','escola'],['city','cidade']],['The park is fun. — O parque é divertido.','We are at the hotel. — Estamos no hotel.','I like this city. — Eu gosto desta cidade.'],'Escolha um lugar que gostaria de visitar e diga “I want to go to the…”.'),
+makeMission('Mundo 4 · Travel Planet','Adventure Directions','🗺️','Simple directions','Siga as pistas para encontrar o tesouro.',[['left','esquerda'],['right','direita'],['stop','pare'],['go','vá/continue']],['Go straight. — Siga em frente.','Turn left. — Vire à esquerda.','Stop here. — Pare aqui.'],'Peça para alguém dar comandos “left”, “right” e “stop”; faça os movimentos.'),
+// WORLD 5 — GAMES
+makeMission('Mundo 5 · Playtime Jungle','Let’s Play!','🛝','Playground','Entre no mundo das brincadeiras.',[['play','brincar/jogar'],['run','correr'],['jump','pular'],['hide','esconder']],['Let’s play! — Vamos brincar!','I can jump. — Eu consigo pular.','Let’s run! — Vamos correr!'],'Faça um movimento para cada palavra: run, jump e hide.'),
+makeMission('Mundo 5 · Playtime Jungle','Toys and Games','🧸','Toys','Aprenda os nomes de brinquedos e jogos.',[['ball','bola'],['doll','boneca'],['toy','brinquedo'],['game','jogo/brincadeira']],['I have a ball. — Eu tenho uma bola.','This is my toy. — Este é meu brinquedo.','The game is fun. — O jogo é divertido.'],'Encontre um brinquedo e fale “This is my toy”.'),
+makeMission('Mundo 5 · Playtime Jungle','Colors Challenge','🎨','Colors','Use as cores para encontrar objetos ao seu redor.',[['red','vermelho'],['blue','azul'],['green','verde'],['yellow','amarelo']],['The ball is red. — A bola é vermelha.','The sky is blue. — O céu é azul.','I see something green. — Eu vejo algo verde.'],'Encontre três objetos coloridos e diga a cor de cada um em inglês.'),
+makeMission('Mundo 5 · Playtime Jungle','Animal Moves','🦁','Animals and actions','Imite animais e descubra como nomeá-los.',[['dog','cachorro'],['cat','gato'],['bird','pássaro'],['fish','peixe']],['The dog can run. — O cachorro consegue correr.','The bird can fly. — O pássaro consegue voar.','I see a fish. — Eu vejo um peixe.'],'Imite um animal e diga seu nome em inglês.'),
+makeMission('Mundo 5 · Playtime Jungle','Simon Says','🎮','Action commands','Jogue “Simon Says” usando comandos simples.',[['clap','bater palmas'],['sit','sentar'],['stand','ficar de pé'],['dance','dançar']],['Clap your hands! — Bata palmas!','Stand up! — Fique de pé!','Let’s dance! — Vamos dançar!'],'Peça a alguém para falar os comandos em inglês e faça as ações.'),
+// WORLD 6 — TIME
+makeMission('Mundo 6 · Time Machine','Days of the Week','📅','Days','Descubra os dias da semana.',[['Monday','segunda-feira'],['Tuesday','terça-feira'],['Friday','sexta-feira'],['Sunday','domingo']],['Today is Monday. — Hoje é segunda-feira.','Friday is fun. — Sexta-feira é divertida.','Sunday is a day off. — Domingo é dia de descanso.'],'Tente dizer os sete dias da semana em inglês, mesmo que precise consultar a lista.'),
+makeMission('Mundo 6 · Time Machine','What Time Is It?','🕒','Clock time','Aprenda formas simples de falar sobre horas.',[['time','hora/tempo'],['morning','manhã'],['afternoon','tarde'],['night','noite']],['Good morning! — Bom dia!','Good afternoon! — Boa tarde!','Good night! — Boa noite!'],'Cumprimente alguém com “Good morning”, “Good afternoon” ou “Good night”.'),
+makeMission('Mundo 6 · Time Machine','Numbers on the Clock','⏰','Numbers and time','Use números para conversar sobre horários.',[['one o’clock','uma hora'],['two o’clock','duas horas'],['three o’clock','três horas'],['six o’clock','seis horas']],['It is one o’clock. — É uma hora.','It is three o’clock. — São três horas.','What time is it? — Que horas são?'],'Olhe para um relógio e pratique perguntar “What time is it?”.'),
+makeMission('Mundo 6 · Time Machine','Yesterday and Today','🌤️','Time words','Diferencie palavras simples sobre o tempo.',[['today','hoje'],['tomorrow','amanhã'],['yesterday','ontem'],['now','agora']],['Today I study English. — Hoje eu estudo inglês.','See you tomorrow! — Até amanhã!','I am happy now. — Estou feliz agora.'],'Complete oralmente: “Today I…”, dizendo algo que faz hoje.'),
+makeMission('Mundo 6 · Time Machine','Seasons and Weather','🌦️','Weather','Fale sobre o clima e o tempo.',[['sunny','ensolarado'],['rainy','chuvoso'],['hot','quente'],['cold','frio']],['It is sunny today. — Hoje está ensolarado.','It is rainy. — Está chuvoso.','I am cold. — Estou com frio.'],'Olhe pela janela e descreva o clima com uma palavra em inglês.'),
+// WORLD 7 — ROUTINE
+makeMission('Mundo 7 · Daily Life Base','Wake Up!','🌅','Morning routine','Comece o dia com palavras para a rotina da manhã.',[['wake up','acordar'],['brush my teeth','escovar os dentes'],['wash my face','lavar o rosto'],['get dressed','vestir-se']],['I wake up in the morning. — Eu acordo de manhã.','I brush my teeth. — Eu escovo os dentes.','I get dressed. — Eu me visto.'],'Conte em inglês uma coisa que você faz quando acorda.'),
+makeMission('Mundo 7 · Daily Life Base','Breakfast Time','🥣','Food and routine','Aprenda palavras para o café da manhã.',[['breakfast','café da manhã'],['bread','pão'],['milk','leite'],['juice','suco']],['I eat breakfast. — Eu tomo café da manhã.','I drink milk. — Eu bebo leite.','I like juice. — Eu gosto de suco.'],'Diga em inglês uma coisa que você gosta de comer ou beber.'),
+makeMission('Mundo 7 · Daily Life Base','School Day','🎒','School routine','Fale sobre coisas que acontecem na escola.',[['school','escola'],['book','livro'],['pencil','lápis'],['teacher','professor(a)']],['I go to school. — Eu vou à escola.','This is my book. — Este é meu livro.','My teacher is nice. — Meu professor é legal.'],'Pegue um material escolar e diga “This is my…”.'),
+makeMission('Mundo 7 · Daily Life Base','After School','⚽','After-school activities','Fale de atividades que faz depois da escola.',[['homework','lição de casa'],['football','futebol'],['read','ler'],['relax','relaxar']],['I do my homework. — Eu faço minha lição de casa.','I play football. — Eu jogo futebol.','I like to read. — Eu gosto de ler.'],'Escolha uma atividade que faz depois da escola e diga uma frase.'),
+makeMission('Mundo 7 · Daily Life Base','Bedtime Mission','🌙','Evening routine','Prepare-se para terminar o dia em inglês.',[['dinner','jantar'],['bath','banho'],['sleep','dormir'],['bed','cama']],['I eat dinner. — Eu janto.','I take a bath. — Eu tomo banho.','It is time to sleep. — Está na hora de dormir.'],'Organize sua rotina da noite e fale uma frase com “I…”'),
+];
+missions.push(...extraMissions);
+missions.forEach((m,i)=>{ if(!m.world) m.world='Mundo 1 · Style & Appearance'; });
+
+const STORE='englishAdventureV2';
+let state=loadState(), current=null, selections={};
+function loadState(){
+  try{const saved=JSON.parse(localStorage.getItem(STORE))||{done:[],xp:0,days:[],name:'Bê'}; if(!saved.name) saved.name='Bê'; return saved}
+  catch(e){return {done:[],xp:0,days:[],name:'Bê'}}
+}
+function save(){localStorage.setItem(STORE,JSON.stringify(state));renderStats();renderMissions();applyName()}
+function fmt(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,'0')+"-"+String(d.getDate()).padStart(2,'0')}
+function getStreak(){
+  const days=[...new Set(state.days)].sort(); let streak=0;
+  if(days.length){let d=new Date();d.setHours(0,0,0,0);let today=fmt(d), y=new Date(d);y.setDate(y.getDate()-1);let yesterday=fmt(y);let cursor=days.includes(today)?d:(days.includes(yesterday)?y:null); if(cursor){while(days.includes(fmt(cursor))){streak++;cursor.setDate(cursor.getDate()-1)}}}
+  return streak;
+}
+function applyName(){
+  const name = state.name && state.name.trim() ? state.name.trim() : 'Bê';
+  document.getElementById('profileName').textContent = name;
+  document.getElementById('heroGreeting').textContent = `Prepare a mochila, ${name}! São vários mundos para explorar, palavras para descobrir e missões para conquistar — um pouquinho de inglês todos os dias!`;
+  document.getElementById('childName').value = state.name || 'Bê';
+}
+function renderStats(){
+  document.getElementById('xp').textContent = state.xp;
+  document.getElementById('completed').textContent = state.done.length + '/' + missions.length;
+  document.getElementById('streak').textContent = getStreak();
+  const progress = Math.round(state.done.length / missions.length * 100);
+  document.getElementById('progressLabel').textContent = progress + '%';
+  document.getElementById('progressBar').style.width = progress + '%';
+}
+const worldIcons=[`<path d="m18 12 10 5 10-5 14 12-9 11-7-6v24H20V29l-7 6L4 24z" fill="#e89574"/><path d="M23 14q5 12 10 0" fill="none" stroke="#fff1bf" stroke-width="4"/>`, `<path d="M8 29 28 11l20 18v25H8z" fill="#efc36f"/><path d="m3 30 25-24 25 24" fill="none" stroke="#ce806b" stroke-width="6"/><path d="M23 36h11v18H23z" fill="#4b8e8b"/><path d="M12 33h7v9h-7m24-9h7v9h-7" fill="#fff6d5"/>`, `<path d="M8 32h40v22H8z" fill="#e99495"/><path d="M7 32q7-9 14 0t14 0 14 0" fill="none" stroke="#fff2ce" stroke-width="6"/><path d="M28 20v11" stroke="#4a999d" stroke-width="5"/><path d="M28 6q-11 13 0 15 11-3 0-15" fill="#e7ae37"/>`, `<path d="m4 27 19-5L33 5h7l-6 18 15 2q8 4 0 8l-15 2 6 17h-7L23 36 4 32z" fill="#4c9ca6"/><path d="M9 46h12v9H9z" fill="#e9b65e"/>`, `<path d="M9 52V12h27v40M7 13h32" fill="none" stroke="#c88d5b" stroke-width="5"/><path d="M16 16v22m13-22v22" stroke="#3f7c79" stroke-width="2"/><path d="M14 39h17" stroke="#e6af4e" stroke-width="5"/><path d="M38 20q6 16 16 24" stroke="#e6af4e" stroke-width="7" fill="none"/>`, `<circle cx="28" cy="30" r="23" fill="#fff1c4" stroke="#d5ab60" stroke-width="5"/><path d="M28 13v18l13 7" stroke="#468c8b" stroke-width="4" fill="none"/><path d="M24 2h8" stroke="#468c8b" stroke-width="4"/>`, `<path d="M6 30h44v24H6z" fill="#bf8c49"/><path d="M6 30q22-32 44 0z" fill="#e9bd61" stroke="#ac803f" stroke-width="3"/><path d="M24 31h9v13h-9z" fill="#fff1b9"/><path d="m43 3 2 6 7 1-5 4 1 7-5-4-6 4 2-7-5-4 7-1z" fill="#e9b139"/>`];
+function adventureIcon(wi){return '<svg viewBox="0 0 56 60" aria-hidden="true">'+worldIcons[wi]+'</svg>';}
+const worldNotes=['Uma cidade de cores, roupas e novos amigos.','Uma ilha de encontros e histórias em família.','Uma festa cheia de descobertas para celebrar.','Passaporte em mãos: a próxima parada é o inglês!','Trilhas, brinquedos e brincadeiras na floresta.','Uma viagem pelas horas, pelos dias e pelo clima.','Sua base de aventuras: da rotina ao grande tesouro.'];
+function renderMissions(){
+  const list=document.getElementById('missionList'); list.replaceChildren();
+  const nav=document.getElementById('worldNav'); nav.replaceChildren();
+  const worlds=[...new Set(missions.map(m=>m.world))];
+  const destinations=document.getElementById('islandDestinations'); destinations.replaceChildren();
+  const nextMission=missions.findIndex((m,i)=>!state.done.includes(i));
+  worlds.forEach((world,wi)=>{
+    const region=document.createElement('section'); region.className='world-region world-'+(wi+1); region.id='world-'+(wi+1);
+    const entries=missions.map((m,i)=>({m,i})).filter(x=>x.m.world===world);
+    const completed=entries.filter(x=>state.done.includes(x.i)).length;
+    region.innerHTML=`<div class="world-art"><img src="assets/scenes/world-${wi+1}-cinematic.webp" alt="${world.split(' · ')[1]}: cenário ilustrado de aventura" width="1376" height="768" loading="lazy"><span class="world-number">${String(wi+1).padStart(2,'0')}</span><span class="world-count">${completed}/${entries.length} exploradas</span></div><div class="world-heading"><span class="section-kicker">REGIÃO ${String(wi+1).padStart(2,'0')} · ${wi===6?'RUMO AO TESOURO':'NOVAS DESCOBERTAS'}</span><h3>${world.split(' · ')[1]}</h3><p>${worldNotes[wi]}</p></div><div class="region-missions"></div>`;
+    const link=document.createElement('a');link.href='#world-'+(wi+1);link.textContent=world.split(' · ')[1];nav.appendChild(link);
+    const marker=document.createElement('a');marker.href='#world-'+(wi+1);marker.className='island-pin pin-'+(wi+1)+(entries.some(x=>x.i===nextMission)?' current-island':'');marker.setAttribute('aria-label','Explorar '+world.split(' · ')[1]);
+    marker.innerHTML=`${entries.some(x=>x.i===nextMission)?'<img src="assets/be-avatar.webp" alt="Bê está aqui" width="48" height="48">':`<b>${wi+1}</b>`}<span>${world.split(' · ')[1]}</span>`;destinations.appendChild(marker);
+    entries.forEach(({m,i})=>{
+      const done=state.done.includes(i),locked=i>0&&!state.done.includes(i-1);
+      const button=document.createElement('button');button.className='mission-card '+(done?'is-done':locked?'is-locked':'is-available');button.disabled=locked;
+      button.innerHTML=`<div class="m-top"><div class="mission-marker" aria-hidden="true"><img src="assets/scenes/mission-${i+1}.webp" alt="" width="144" height="144" loading="lazy"><span class="marker-number">${done?'✓':String(i+1).padStart(2,'0')}</span></div><div><h3>${m.title}</h3><p>${m.theme}</p><span class="tag ${done?'done':locked?'lock':''}">${done?'✓ Concluída':locked?'◇ Complete a fase anterior':'Explorar missão →'}</span><div class="reward"><img class="reward-chest" src="assets/scenes/chest-${done?'open':'closed'}.webp" alt="${done?'Tesouro conquistado':'Tesouro a descobrir'}" width="52" height="42" loading="lazy"><span>${m.reward}</span></div></div></div>`;
+      button.onclick=()=>openMission(i);region.querySelector('.region-missions').appendChild(button);
+    });
+    list.appendChild(region);
+  });
+}
+
+function openMission(i){
+  current=i; selections={};
+  const m = missions[i];
+  const panel = document.getElementById('missionPanel');
+  document.getElementById('missionEyebrow').textContent='MISSÃO '+String(i+1).padStart(3,'0')+' · '+m.theme.toUpperCase();
+  document.getElementById('missionTitle').textContent = '✦ '+m.title;
+  document.getElementById('missionIntro').textContent = m.intro;
+  document.getElementById('bannerTitle').textContent = m.title;
+  document.getElementById('bannerText').textContent = m.banner;
+  document.getElementById('missionImage').src = explorerIllustration;
+  let c = document.getElementById('missionContent');
+  c.innerHTML = `<h3 style="font-size:18px;margin-top:12px;color:var(--navy)">1. Vocabulary · Aprenda as palavras</h3>
+    <div class="word-grid">${m.words.map((w,wi)=>`<div class="word"><div class="word-copy"><b>${w[0]}</b><span>${w[1]}</span></div><button class="speech-btn word-listen" type="button" data-word="${wi}" aria-label="Ouvir ${w[0]}">🔊 Ouvir</button></div>`).join('')}</div>
+    <div class="task"><h3>2. Listen & Speak · Ouça e pratique</h3><p>Primeiro ouça a frase. Depois toque em <b>Praticar</b> e fale perto do microfone.</p><div class="phrase-list">${m.phrases.map((p,pi)=>{const parts=p.split(' — ');return `<div class="speech-row"><div class="speech-copy"><span class="english-line" id="phraseText${pi}">${parts[0]}</span><span class="translation-line">${parts.slice(1).join(' — ')}</span></div><div class="speech-actions"><button class="speech-btn phrase-listen" type="button" data-phrase="${pi}">🔊 Ouvir</button><button class="speech-btn phrase-practice" type="button" data-phrase="${pi}">🎙️ Praticar</button></div><p class="speech-feedback" id="speechFeedback${pi}" aria-live="polite">Ouça e depois tente falar a frase.</p></div>`}).join('')}</div><p><b>Dica:</b> não precisa acertar de primeira. Tente falar devagar, prestando atenção nos sons.</p></div>
+    <div class="task"><h3>3. Speaking Mission · Sua vez!</h3><p>${m.speak}</p><p class="example">Fale em voz alta antes de seguir para o quiz.</p><label><input id="speakDone" type="checkbox"> Já pratiquei falando em inglês!</label></div>
+    <h3 style="font-size:18px;color:var(--navy)">4. Final Quiz · Mostre o que aprendeu</h3>
+    <div id="quizArea"></div>
+    <div class="actions"><button class="btn" id="checkQuiz">Corrigir respostas</button><button class="btn secondary" id="finishMission" disabled>Concluir missão e ganhar XP</button></div><p id="quizResult" class="feedback" aria-live="polite"></p>`;
+  // Prática de pronúncia usando recursos nativos do navegador (sem API paga).
+  const speakEnglish = (text) => {
+    if (!('speechSynthesis' in window)) { alert('Este navegador não oferece leitura de voz. Tente abrir o site no Google Chrome.'); return; }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US'; utterance.rate = 0.82;
+    const voices = window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(v => /^en(-|_)/i.test(v.lang));
+    if (englishVoice) utterance.voice = englishVoice;
+    window.speechSynthesis.speak(utterance);
+  };
+  const startPronunciationCheck = (target, feedback) => {
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Recognition) {
+      feedback.className = 'speech-feedback try';
+      feedback.textContent = 'A avaliação pelo microfone não está disponível neste navegador. Tente no Google Chrome atualizado; você ainda pode usar “Ouvir” para praticar.';
+      return;
+    }
+    const recognition = new Recognition();
+    recognition.lang = 'en-US'; recognition.interimResults = false; recognition.maxAlternatives = 1;
+    feedback.className = 'speech-feedback'; feedback.textContent = 'Estou ouvindo… fale a frase em inglês.';
+    recognition.onresult = (event) => {
+      const heard = event.results[0][0].transcript;
+      const clean = value => value.toLowerCase().replace(/[^a-z0-9' ]/g, ' ').replace(/\s+/g, ' ').trim();
+      const targetWords = clean(target).split(' ').filter(Boolean);
+      const heardWords = clean(heard).split(' ').filter(Boolean);
+      const matches = targetWords.filter(word => heardWords.includes(word)).length;
+      const ratio = targetWords.length ? matches / targetWords.length : 0;
+      feedback.className = 'speech-feedback ' + (ratio >= 0.8 ? 'good' : 'try');
+      if (ratio >= 0.8) feedback.textContent = `Muito bem! O navegador reconheceu: “${heard}”. Repita mais uma vez para treinar.`;
+      else if (ratio >= 0.45) feedback.textContent = `Boa tentativa! O navegador ouviu: “${heard}”. Tente falar mais devagar e aproximar os sons da frase: “${target}”.`;
+      else feedback.textContent = `O navegador ouviu: “${heard}”. Vamos tentar de novo: ouça o modelo e fale devagar: “${target}”.`;
+    };
+    recognition.onerror = (event) => {
+      feedback.className = 'speech-feedback try';
+      feedback.textContent = event.error === 'not-allowed' ? 'O microfone está bloqueado. Permita o acesso ao microfone nas configurações do navegador.' : 'Não consegui entender desta vez. Confira o microfone e tente novamente em um lugar mais silencioso.';
+    };
+    recognition.onnomatch = () => { feedback.className = 'speech-feedback try'; feedback.textContent = 'Não consegui reconhecer as palavras. Tente falar mais devagar.'; };
+    recognition.start();
+  };
+  c.querySelectorAll('.word-listen').forEach(button => button.addEventListener('click', () => speakEnglish(m.words[+button.dataset.word][0])));
+  c.querySelectorAll('.phrase-listen').forEach(button => button.addEventListener('click', () => speakEnglish(m.phrases[+button.dataset.phrase].split(' — ')[0])));
+  c.querySelectorAll('.phrase-practice').forEach(button => button.addEventListener('click', () => {
+    const phraseIndex = +button.dataset.phrase;
+    const target = m.phrases[phraseIndex].split(' — ')[0];
+    startPronunciationCheck(target, document.getElementById('speechFeedback'+phraseIndex));
+  }));
+  const qa = document.getElementById('quizArea');
+  m.quiz.forEach((q,qi)=>{
+    const box = document.createElement('div'); box.className='task';
+    box.innerHTML = `<div class="question">${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,oi)=>`<button class="option" data-q="${qi}" data-o="${oi}">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}</div><div class="feedback" id="fb${qi}"></div>`;
+    qa.appendChild(box);
+  });
+  qa.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',()=>{
+    if(document.getElementById('finishMission').disabled===false) return;
+    const q=+btn.dataset.q; selections[q]=+btn.dataset.o;
+    qa.querySelectorAll(`[data-q="${q}"]`).forEach(x=>x.classList.remove('selected'));
+    btn.classList.add('selected');
+  }));
+  document.getElementById('checkQuiz').onclick=()=>{
+    let correct=0, answered=0;
+    m.quiz.forEach((q,qi)=>{
+      const fb=document.getElementById('fb'+qi);
+      qa.querySelectorAll(`[data-q="${qi}"]`).forEach(x=>x.classList.remove('correct','wrong'));
+      if(selections[qi]!==undefined){
+        answered++;
+        const btn=qa.querySelector(`[data-q="${qi}"][data-o="${selections[qi]}"]`);
+        if(selections[qi]===q.a){correct++; btn.classList.add('correct'); fb.style.color='var(--green)'; fb.textContent='Muito bem! Correct!';}
+        else {btn.classList.add('wrong'); qa.querySelector(`[data-q="${qi}"][data-o="${q.a}"]`).classList.add('correct'); fb.style.color='var(--red)'; fb.textContent='Quase! A resposta correta está marcada em verde.';}
+      } else {fb.style.color='var(--muted)'; fb.textContent='Escolha uma resposta.';}
+    });
+    const result=document.getElementById('quizResult');
+    result.textContent=`Você acertou ${correct} de ${m.quiz.length}. ${correct===m.quiz.length ? 'Amazing!' : 'Revise as respostas e tente novamente.'}`;
+    if(answered===m.quiz.length){document.getElementById('finishMission').disabled=false; document.getElementById('finishMission').textContent = state.done.includes(i)?'Missão já concluída':'Concluir missão e ganhar XP';}
+  };
+  document.getElementById('finishMission').onclick=()=>{
+    if(!document.getElementById('speakDone').checked){document.getElementById('quizResult').textContent='Antes de concluir, marque que praticou falando em inglês.'; return;}
+    if(!state.done.includes(i)){state.done.push(i); state.done.sort((a,b)=>a-b); state.xp += 100; const day = fmt(new Date()); state.days.push(day); state.days=[...new Set(state.days)]; save();}
+    document.getElementById('quizResult').textContent = '🎉 Mission complete! Você ganhou 100 XP. ' + (i===missions.length-1 ? 'Você concluiu todos os mundos do English Adventure! Você é um Adventure Champion!' : 'A próxima missão foi desbloqueada.');
+    document.getElementById('finishMission').disabled=true; document.getElementById('finishMission').textContent='Missão concluída ✓';
+    document.getElementById('quizResult').classList.add('achievement');
+  };
+  document.getElementById('quizResult').classList.remove('achievement');
+  panel.classList.add('active');
+  panel.setAttribute('tabindex','-1'); panel.focus({preventScroll:true});
+  panel.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+document.getElementById('closePanel').onclick=()=>document.getElementById('missionPanel').classList.remove('active');
+document.getElementById('resetBtn').onclick=()=>{if(confirm('Tem certeza de que deseja apagar o progresso deste dispositivo?')){state={done:[],xp:0,days:[],name:state.name||'Bê'}; save(); document.getElementById('missionPanel').classList.remove('active')}};
+document.getElementById('saveName').onclick=()=>{state.name=document.getElementById('childName').value.trim(); save(); const text = state.name ? `Nome salvo! Agora o projeto está personalizado para ${state.name}.` : 'Nome removido. O projeto voltou para o modo padrão.'; alert(text)};
+applyName(); renderStats(); renderMissions();
+</script>
+</body>
+</html>
